@@ -11,7 +11,13 @@ export default function Home() {
   } = useData({ api: getRestaurants });
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="grid w-full grid-cols-1 gap-8 lg:grid-cols-2 2xl:grid-cols-3 place-items-center">
+        {Array.from({ length: 6 }, (_, index) => (
+          <Card.Skeleton key={index} />
+        ))}
+      </div>
+    );
   }
 
   if (error) {
