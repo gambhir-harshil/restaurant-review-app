@@ -10,7 +10,7 @@ const Navbar = () => {
   return (
     <nav
       className={cn(
-        "fixed top-0 z-50 flex items-center w-full p-6 justify-between",
+        "fixed top-0 z-50 flex items-center w-full p-6 justify-between bg-background",
         scrolled && "border-b shadow-sm"
       )}
     >

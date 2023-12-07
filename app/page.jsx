@@ -1,10 +1,30 @@
 "use client";
+import useData from "@/hooks/useData";
 import { getRestaurants } from "@/services/apiRestaurants";
-import { useEffect } from "react";
+import Card from "./_components/card";
 
 export default function Home() {
-  useEffect(() => {
-    getRestaurants().then((data) => console.log(data));
-  }, []);
-  return <main className="h-screen overflow-y-scroll"></main>;
+  const {
+    data: restaurants,
+    loading,
+    error,
+  } = useData({ api: getRestaurants });
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error.message}</p>;
+  }
+
+  return (
+    <>
+      <div className="grid w-full grid-cols-1 gap-8 lg:grid-cols-2 2xl:grid-cols-3 place-items-center">
+        {restaurants.map((restaurant) => (
+          <Card restaurant={restaurant} key={restaurant.id} />
+        ))}
+      </div>
+    </>
+  );
 }
