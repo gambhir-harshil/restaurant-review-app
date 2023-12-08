@@ -102,9 +102,13 @@ const Reviews = ({ id }) => {
       <div className="flex flex-col w-full px-8">
         <h3 className="mb-2 text-xl font-semibold">Recent reviews</h3>
         <hr className="w-full border border-border" />
-        {reviews.map((review) => (
-          <Review key={review.id} review={review} />
-        ))}
+        {reviews.length !== 0 ? (
+          reviews.map((review) => <Review key={review.id} review={review} />)
+        ) : (
+          <div className="mt-4 text-2xl font-semibold text-center">
+            No reviews yet!
+          </div>
+        )}
       </div>
     </div>
   );
