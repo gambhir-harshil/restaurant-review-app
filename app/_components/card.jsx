@@ -1,6 +1,7 @@
 import { Button } from "components/ui/button";
 import { Skeleton } from "components/ui/skeleton";
 import { useRouter } from "next/navigation";
+import Rating from "@mui/material/Rating";
 
 const Card = ({ restaurant }) => {
   const router = useRouter();
@@ -22,7 +23,14 @@ const Card = ({ restaurant }) => {
         />
       </div>
       <div className="flex justify-between">
-        <span className="font-semibold">{restaurant.name}</span>
+        <div className="flex flex-col gap-2">
+          <span className="font-semibold">{restaurant.name}</span>
+          <Rating
+            name="average_rating"
+            value={restaurant.average_rating}
+            readOnly
+          />
+        </div>
         <Button size="sm">Rate now</Button>
       </div>
     </div>

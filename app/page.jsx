@@ -12,11 +12,16 @@ export default function Home() {
 
   if (loading) {
     return (
-      <div className="grid w-full grid-cols-1 gap-8 lg:grid-cols-2 2xl:grid-cols-3 place-items-center">
-        {Array.from({ length: 6 }, (_, index) => (
-          <Card.Skeleton key={index} />
-        ))}
-      </div>
+      <>
+        <h1 className="mb-8 text-3xl font-bold">
+          Popular Restaurants around your area
+        </h1>
+        <div className="grid w-full grid-cols-1 gap-8 lg:grid-cols-2 2xl:grid-cols-3 place-items-center">
+          {Array.from({ length: 6 }, (_, index) => (
+            <Card.Skeleton key={index} />
+          ))}
+        </div>
+      </>
     );
   }
 
@@ -26,6 +31,9 @@ export default function Home() {
 
   return (
     <>
+      <h1 className="mb-8 text-3xl font-bold">
+        Popular Restaurants around your area
+      </h1>
       <div className="grid w-full grid-cols-1 gap-8 lg:grid-cols-2 2xl:grid-cols-3 place-items-center">
         {restaurants.map((restaurant) => (
           <Card restaurant={restaurant} key={restaurant.id} />

@@ -4,6 +4,7 @@ import { getRestaurantById } from "services/apiRestaurants";
 import useData from "hooks/useData";
 import Reviews from "./_components/reviews";
 import { Skeleton } from "components/ui/skeleton";
+import Rating from "@mui/material/Rating";
 
 const Restaurant = ({ params }) => {
   const {
@@ -19,8 +20,8 @@ const Restaurant = ({ params }) => {
   if (loading) {
     return (
       <>
-        <div className="flex flex-col gap-4 px-16 py-4 border rounded-lg lg:flex-row lg:justify-between lg:items-center border-border">
-          <Skeleton className="h-[480px] w-[640px]" />
+        <div className="flex flex-col gap-4 px-4 py-4 border rounded-lg lg:px-16 lg:flex-row lg:justify-between lg:items-center border-border">
+          <Skeleton className="h-[480px] lg:w-[640px] w-full" />
           <div className="flex flex-col gap-2 lg:gap-8">
             <div className="flex justify-between lg:items-center">
               <Skeleton className="w-64 h-8" />
@@ -50,11 +51,16 @@ const Restaurant = ({ params }) => {
           />
         </div>
         <div className="flex flex-col gap-2 lg:gap-8">
-          <div className="flex justify-between lg:items-center">
+          <div className="flex flex-col justify-between gap-2 lg:flex-row lg:items-center">
             <span className="text-lg font-semibold lg:text-4xl ">
               {restaurant[0].name}
             </span>
-            <span>Rating</span>
+            <Rating
+              name="average_rating"
+              value={restaurant[0].average_rating}
+              readOnly
+              size="large"
+            />
           </div>
           <p className="max-w-lg text-sm font-semibold text-muted-foreground lg:text-base">
             {restaurant[0].description}

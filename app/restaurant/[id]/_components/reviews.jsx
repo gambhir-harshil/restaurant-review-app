@@ -6,6 +6,8 @@ import Review from "./review";
 import useData from "hooks/useData";
 import { useEffect, useState } from "react";
 import supabase from "../../../../services/supabase";
+import Rating from "@mui/material/Rating";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
 
 const Reviews = ({ id }) => {
   const [input, setInput] = useState("");
@@ -55,7 +57,7 @@ const Reviews = ({ id }) => {
   }, [id]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="border-red-600">Loading...</div>;
   }
 
   if (error) {
@@ -63,12 +65,19 @@ const Reviews = ({ id }) => {
   }
 
   return (
-    <div className="flex flex-col gap-4 p-4 border rounded-lg border-border">
-      <form
-        action="submit"
-        onSubmit={handlePostReview}
-        className="flex items-center justify-center gap-4"
-      >
+    <div className="flex flex-col items-center gap-4 p-4 border rounded-lg border-border">
+      <h1 className="text-2xl font-bold text-center text-muted-foreground">
+        Rate now
+      </h1>
+      <Rating
+        name="user_rating"
+        onChange={(e, newRating) => {}}
+        size="large"
+        emptyIcon={
+          <StarBorderIcon fontSize="inherit" className="text-yellow-400" />
+        }
+      />
+      <div className="flex items-center justify-center gap-4">
         <input
           type="text"
           onChange={(e) => setInput(e.target.value)}
@@ -77,13 +86,13 @@ const Reviews = ({ id }) => {
           className="px-4 py-2 border rounded-lg outline-none bg-background border-border"
         />
         <Button
-          type="submit"
+          onClick={handlePostReview}
           className="font-semibold rounded-r-lg"
           variant="secondary"
         >
           Post
         </Button>
-      </form>
+      </div>
       {reviews.map((review) => (
         <Review key={review.id} review={review} />
       ))}
