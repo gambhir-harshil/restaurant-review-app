@@ -10,12 +10,19 @@ import useAuth from "hooks/useAuth";
 import { LogOut } from "lucide-react";
 
 import { logout } from "services/apiAuth";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  const router = useRouter();
   const pathname = usePathname();
   const isLoginOrRegister = pathname === "/login" || pathname === "/register";
   const scrolled = useScrollTop();
   const { isAuthenticated } = useAuth();
+
+  function handleLogout() {
+    logout();
+    router.push("/login");
+  }
   return (
     <nav
       className={cn(
@@ -32,7 +39,7 @@ const Navbar = () => {
             <Link href="/login">Sign In</Link>
           </Button>
         ) : (
-          <LogOut onClick={logout} className="cursor-pointer" />
+          <LogOut onClick={handleLogout} className="cursor-pointer" />
         )}
         <ModeToggle />
       </div>
