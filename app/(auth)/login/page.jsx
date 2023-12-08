@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import Link from "next/link";
 import { login } from "services/apiAuth";
+import { toast } from "sonner";
 
 import { Button } from "components/ui/button";
 import {
@@ -41,8 +42,9 @@ const Login = () => {
     try {
       await login(values);
       router.push("/");
+      toast("Logged in sucessfully");
     } catch (err) {
-      console.log(err);
+      toast(err.message);
     }
   }
   return (

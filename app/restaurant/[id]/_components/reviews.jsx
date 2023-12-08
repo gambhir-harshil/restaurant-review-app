@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import supabase from "../../../../services/supabase";
 import Rating from "@mui/material/Rating";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
+import { toast } from "sonner";
 
 const Reviews = ({ id }) => {
   const [input, setInput] = useState("");
@@ -39,6 +40,7 @@ const Reviews = ({ id }) => {
     setInput("");
     setRating(1);
     await fetchReviews(id);
+    toast("Review posted!");
   }
 
   useEffect(() => {

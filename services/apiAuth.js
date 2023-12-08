@@ -1,4 +1,5 @@
 import supabase from "./supabase";
+import { toast } from "sonner";
 
 export async function signup({ name, email, password }) {
   const { data, error } = await supabase.auth.signUp({
@@ -11,6 +12,11 @@ export async function signup({ name, email, password }) {
       },
     },
   });
+  if (error) {
+    toast(error.message);
+  } else {
+    toast("Registered successfully!");
+  }
 }
 
 export async function login({ email, password }) {
@@ -38,4 +44,5 @@ export async function getCurrentUser() {
 export async function logout() {
   const { error } = await supabase.auth.signOut();
   if (error) throw new Error(error.message);
+  else toast("Logged out successfully");
 }

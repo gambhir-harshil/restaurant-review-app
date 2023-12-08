@@ -42,8 +42,12 @@ const Register = () => {
   });
 
   function onSubmit(values) {
-    signup(values);
-    router.push("/");
+    try {
+      signup(values);
+      router.push("/");
+    } catch (err) {
+      console.log(err.message);
+    }
   }
 
   return (
