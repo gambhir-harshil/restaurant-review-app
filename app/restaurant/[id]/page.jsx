@@ -21,7 +21,7 @@ const Restaurant = ({ params }) => {
     return (
       <>
         <div className="flex flex-col gap-4 px-4 py-4 border rounded-lg lg:px-16 lg:flex-row lg:justify-between lg:items-center border-border">
-          <Skeleton className="h-[480px] lg:w-[640px] w-full" />
+          <Skeleton className="md:h-[480px] h-[240  px] lg:w-[640px] w-full" />
           <div className="flex flex-col gap-2 lg:gap-8">
             <div className="flex justify-between lg:items-center">
               <Skeleton className="w-64 h-8" />

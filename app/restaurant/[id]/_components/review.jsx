@@ -9,9 +9,11 @@ const Review = ({ review }) => {
     return timeAgo;
   }
   return (
-    <div className="flex items-center justify-between gap-2 px-16 py-2 mt-4 rounded-lg bg-secondary/30">
-      <div className="flex flex-col gap-1">
-        <span className="max-w-md text-lg font-semibold">{review.review}</span>
+    <div className="flex items-center justify-between gap-2 px-2 py-2 mt-4 rounded-lg md:px-16 bg-secondary/30">
+      <div className="flex flex-col gap-2 md:gap-1">
+        <span className="text-sm font-semibold md:max-w-md md:text-lg">
+          {review.review}
+        </span>
         <span>
           <Rating
             name="average_rating"
@@ -26,7 +28,7 @@ const Review = ({ review }) => {
           />
         </span>
       </div>
-      <span className="text-muted-foreground text-semibold">
+      <span className="text-xs text-muted-foreground text-semibold md:text-base">
         {handleDateFormatter(review.created_at)}
       </span>
     </div>

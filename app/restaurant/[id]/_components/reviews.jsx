@@ -85,13 +85,13 @@ const Reviews = ({ id }) => {
           <StarBorderIcon fontSize="inherit" className="dark:text-yellow-400" />
         }
       />
-      <div className="flex items-center justify-center gap-4">
+      <div className="flex flex-col items-center justify-center gap-4 md:flex-row">
         <input
           type="text"
           onChange={(e) => setInput(e.target.value)}
           value={input}
           placeholder="Write a review"
-          className="px-4 py-2 border rounded-lg outline-none bg-background border-border min-w-[338px]"
+          className="px-4 py-2 border rounded-lg outline-none bg-background border-border md:w-[320px]"
         />
         <Button
           onClick={handlePostReview}
@@ -101,7 +101,7 @@ const Reviews = ({ id }) => {
           Post
         </Button>
       </div>
-      <div className="flex flex-col w-full px-8">
+      <div className="flex flex-col w-full md:px-8">
         <h3 className="mb-2 text-xl font-semibold">Recent reviews</h3>
         <hr className="w-full border border-border" />
         {reviews.length !== 0 ? (
