@@ -12,6 +12,7 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 const Reviews = ({ id }) => {
   const [input, setInput] = useState("");
   const [reviews, setReviews] = useState([]);
+  const [rating, setRating] = useState(1);
   const { loading, error } = useData({ api: getReviews, id });
 
   async function fetchReviews() {
@@ -32,6 +33,7 @@ const Reviews = ({ id }) => {
       {
         review: input,
         restaurant_id: id,
+        individual_rating: rating,
       },
     ]);
     setInput("");
@@ -71,10 +73,13 @@ const Reviews = ({ id }) => {
       </h1>
       <Rating
         name="user_rating"
-        onChange={(e, newRating) => {}}
+        value={rating}
+        onChange={(e, newRating) => {
+          setRating(newRating);
+        }}
         size="large"
         emptyIcon={
-          <StarBorderIcon fontSize="inherit" className="text-yellow-400" />
+          <StarBorderIcon fontSize="inherit" className="dark:text-yellow-400" />
         }
       />
       <div className="flex items-center justify-center gap-4">
@@ -93,9 +98,13 @@ const Reviews = ({ id }) => {
           Post
         </Button>
       </div>
-      {reviews.map((review) => (
-        <Review key={review.id} review={review} />
-      ))}
+      <div className="flex flex-col w-full px-8">
+        <h3 className="mb-2 text-xl font-semibold">Recent reviews</h3>
+        <hr className="w-full border border-border" />
+        {reviews.map((review) => (
+          <Review key={review.id} review={review} />
+        ))}
+      </div>
     </div>
   );
 };
