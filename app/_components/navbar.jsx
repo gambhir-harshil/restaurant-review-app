@@ -11,6 +11,7 @@ import { LogOut } from "lucide-react";
 
 import { logout } from "services/apiAuth";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const Navbar = () => {
   const router = useRouter();
@@ -23,6 +24,9 @@ const Navbar = () => {
     logout();
     router.push("/login");
   }
+
+  useEffect(() => {}, [isAuthenticated]);
+
   return (
     <nav
       className={cn(
