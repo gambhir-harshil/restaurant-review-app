@@ -4,7 +4,6 @@ import { getCurrentUser } from "services/apiAuth";
 const useAuth = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [loading, setLoading] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     async function fetchCurrentUser() {
@@ -12,11 +11,6 @@ const useAuth = () => {
         setLoading(true);
         const user = await getCurrentUser();
         setCurrentUser(user);
-        if (!currentUser) {
-          setIsAuthenticated(false);
-        } else {
-          setIsAuthenticated(true);
-        }
       } catch (err) {
         console.error(err);
       } finally {
@@ -26,7 +20,11 @@ const useAuth = () => {
     fetchCurrentUser();
   }, []);
 
-  return { currentUser, loading, isAuthenticated };
+  return {
+    currentUser,
+    loading,
+    isAuthenticated: currentUser?.role === "authenticated",
+  };
 };
 
 export default useAuth;
