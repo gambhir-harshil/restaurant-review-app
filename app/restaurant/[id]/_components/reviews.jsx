@@ -37,6 +37,7 @@ const Reviews = ({ id }) => {
       },
     ]);
     setInput("");
+    setRating(1);
     await fetchReviews(id);
   }
 
@@ -88,7 +89,7 @@ const Reviews = ({ id }) => {
           onChange={(e) => setInput(e.target.value)}
           value={input}
           placeholder="Write a review"
-          className="px-4 py-2 border rounded-lg outline-none bg-background border-border"
+          className="px-4 py-2 border rounded-lg outline-none bg-background border-border min-w-[338px]"
         />
         <Button
           onClick={handlePostReview}

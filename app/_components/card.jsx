@@ -31,7 +31,9 @@ const Card = ({ restaurant }) => {
             readOnly
           />
         </div>
-        <Button size="sm">Rate now</Button>
+        <Button size="sm" onClick={redirect}>
+          Rate now
+        </Button>
       </div>
     </div>
   );
