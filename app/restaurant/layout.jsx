@@ -14,7 +14,7 @@ const RestaurantLayout = ({ children }) => {
   if (!currentUser) {
     router.push("/login");
   }
-  return <div>{children}</div>;
+  return <div className="flex flex-col gap-8">{children}</div>;
 };
 
 export default RestaurantLayout;

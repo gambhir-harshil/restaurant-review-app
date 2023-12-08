@@ -3,6 +3,7 @@
 import { getRestaurantById } from "services/apiRestaurants";
 import useData from "hooks/useData";
 import Reviews from "./_components/reviews";
+import { Skeleton } from "components/ui/skeleton";
 
 const Restaurant = ({ params }) => {
   const {
@@ -16,7 +17,22 @@ const Restaurant = ({ params }) => {
   });
 
   if (loading) {
-    return <div>loading...</div>;
+    return (
+      <>
+        <div className="flex flex-col gap-4 px-16 py-4 border rounded-lg lg:flex-row lg:justify-between lg:items-center border-border">
+          <Skeleton className="h-[480px] w-[640px]" />
+          <div className="flex flex-col gap-2 lg:gap-8">
+            <div className="flex justify-between lg:items-center">
+              <Skeleton className="w-64 h-8" />
+            </div>
+            <Skeleton className="h-2 w-128" />
+            <Skeleton className="h-2 w-128" />
+            <Skeleton className="h-2 w-128" />
+          </div>
+        </div>
+        <Reviews id={params.id} />
+      </>
+    );
   }
 
   if (error) {
@@ -25,14 +41,22 @@ const Restaurant = ({ params }) => {
 
   return (
     <div className="flex flex-col gap-8">
-      <div className="flex flex-col gap-4 p-4 border rounded-lg lg:flex-row border-border">
-        <img src={restaurant[0].image} alt={restaurant[0].name} />
-        <div className="flex flex-col gap-2">
-          <div className="flex justify-between">
-            <span className="text-lg font-semibold">{restaurant[0].name}</span>
+      <div className="flex flex-col gap-4 p-4 border rounded-lg lg:flex-row lg:justify-around lg:items-center border-border">
+        <div className="lg:h-[480px]">
+          <img
+            src={restaurant[0].image}
+            alt={restaurant[0].name}
+            className="object-cover w-full h-full"
+          />
+        </div>
+        <div className="flex flex-col gap-2 lg:gap-8">
+          <div className="flex justify-between lg:items-center">
+            <span className="text-lg font-semibold lg:text-4xl ">
+              {restaurant[0].name}
+            </span>
             <span>Rating</span>
           </div>
-          <p className="max-w-lg text-sm font-semibold text-muted-foreground">
+          <p className="max-w-lg text-sm font-semibold text-muted-foreground lg:text-base">
             {restaurant[0].description}
           </p>
         </div>
