@@ -15,8 +15,13 @@ import {
   FormMessage,
 } from "components/ui/form";
 import { Input } from "components/ui/input";
+import { signup } from "services/apiAuth";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
+  name: z.string().min(2, {
+    message: "name must be atleast 2 characters",
+  }),
   email: z.string().email({
     message: "Invalid email address",
   }),
@@ -26,17 +31,21 @@ const formSchema = z.object({
 });
 
 const Register = () => {
+  const router = useRouter();
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      name: "",
       email: "",
       password: "",
     },
   });
 
   function onSubmit(values) {
-    console.log(values);
+    signup(values);
+    router.push("/");
   }
+
   return (
     <div className="flex flex-col items-center justify-center h-full gap-16 p-8">
       <h1 className="text-5xl font-semibold">Register</h1>
@@ -44,7 +53,20 @@ const Register = () => {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
             control={form.control}
-            name="username"
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Name</FormLabel>
+                <FormControl>
+                  <Input placeholder="john" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="email"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Email</FormLabel>

@@ -7,6 +7,9 @@ import { cn } from "lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import useAuth from "hooks/useAuth";
+import { LogOut } from "lucide-react";
+
+import { logout } from "services/apiAuth";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -23,11 +26,13 @@ const Navbar = () => {
       <Link href="/" className="text-2xl font-bold">
         YUM
       </Link>
-      <div className="flex gap-4">
-        {!isLoginOrRegister && !isAuthenticated && (
+      <div className="flex items-center gap-4">
+        {isLoginOrRegister || !isAuthenticated ? (
           <Button>
             <Link href="/login">Sign In</Link>
           </Button>
+        ) : (
+          <LogOut onClick={logout} className="cursor-pointer" />
         )}
         <ModeToggle />
       </div>
