@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { getRestaurantById } from "services/apiRestaurants";
 
-const useData = ({ api }) => {
+const useData = (options) => {
+  const { api, id } = options;
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -9,7 +11,7 @@ const useData = ({ api }) => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const res = await api();
+        const res = id ? await api(id) : await api();
         setData(res);
       } catch (err) {
         setError(err);
@@ -18,8 +20,12 @@ const useData = ({ api }) => {
       }
     };
     fetchData();
-  }, [api]);
-  return { data, loading, error };
+  }, [api, id]);
+  return {
+    data,
+    loading,
+    error,
+  };
 };
 
 export default useData;

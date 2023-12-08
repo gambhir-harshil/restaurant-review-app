@@ -3,7 +3,7 @@ import "./globals.css";
 
 import { Toaster } from "sonner";
 import Navbar from "./_components/navbar";
-import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { ThemeProvider } from "/components/providers/ThemeProvider";
 import Footer from "./_components/footer";
 
 export const metadata = {

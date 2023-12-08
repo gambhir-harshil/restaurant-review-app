@@ -10,3 +10,16 @@ export async function getRestaurants() {
 
   return data;
 }
+
+export async function getRestaurantById(id) {
+  let { data, error } = await supabase
+    .from("Restaurants")
+    .select()
+    .eq("id", id);
+
+  if (error) {
+    console.error(error);
+    throw new Error("Restaurant could not be loaded");
+  }
+  return data;
+}

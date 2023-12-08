@@ -1,12 +1,18 @@
 "use client";
 
-import { ModeToggle } from "@/components/mode-toggle";
-import { Button } from "@/components/ui/button";
-import { useScrollTop } from "@/hooks/useScrolltop";
-import { cn } from "@/lib/utils";
+import { ModeToggle } from "components/mode-toggle";
+import { Button } from "components/ui/button";
+import { useScrollTop } from "hooks/useScrolltop";
+import { cn } from "lib/utils";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import useAuth from "hooks/useAuth";
 
 const Navbar = () => {
+  const pathname = usePathname();
+  const isLoginOrRegister = pathname === "/login" || pathname === "/register";
   const scrolled = useScrollTop();
+  const { isAuthenticated } = useAuth();
   return (
     <nav
       className={cn(
@@ -14,9 +20,15 @@ const Navbar = () => {
         scrolled && "border-b shadow-sm"
       )}
     >
-      <h1 className="text-2xl font-bold">YUM</h1>
+      <Link href="/" className="text-2xl font-bold">
+        YUM
+      </Link>
       <div className="flex gap-4">
-        <Button>Sign In</Button>
+        {!isLoginOrRegister && !isAuthenticated && (
+          <Button>
+            <Link href="/login">Sign In</Link>
+          </Button>
+        )}
         <ModeToggle />
       </div>
     </nav>

@@ -1,6 +1,6 @@
 "use client";
-import useData from "@/hooks/useData";
-import { getRestaurants } from "@/services/apiRestaurants";
+import useData from "hooks/useData";
+import { getRestaurants } from "services/apiRestaurants";
 import Card from "./_components/card";
 
 export default function Home() {

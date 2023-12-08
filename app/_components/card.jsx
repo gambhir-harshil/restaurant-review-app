@@ -1,10 +1,20 @@
-import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "components/ui/button";
+import { Skeleton } from "components/ui/skeleton";
+import { useRouter } from "next/navigation";
 
 const Card = ({ restaurant }) => {
+  const router = useRouter();
+
+  const redirect = () => {
+    router.push(`/restaurant/${restaurant.id}`);
+  };
+
   return (
     <div className="flex flex-col gap-4 p-4 border rounded-lg border-border">
-      <div className="h-[240px] w-[300px] sm:w-[480px] sm:h-[360px] lg:w-[480px] md:w-[560px] lg:h-[360px] overflow-hidden cursor-pointer">
+      <div
+        className="h-[240px] w-[380px] sm:w-[480px] sm:h-[360px] lg:w-[480px] md:w-[560px] lg:h-[360px] overflow-hidden cursor-pointer"
+        onClick={redirect}
+      >
         <img
           src={restaurant.image}
           alt={restaurant.name}
